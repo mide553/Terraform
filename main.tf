@@ -1,4 +1,22 @@
 ###############################################
+# Terraform Configuration & Remote State
+###############################################
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+
+  backend "s3" {
+    bucket = "terraform-state-bucket-if23b040"
+    key    = "workshop/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+###############################################
 # AWS Provider
 ###############################################
 provider "aws" {
@@ -50,7 +68,7 @@ resource "aws_route_table" "main_rt" {
 }
 
 ###############################################
-# Subnets (Application Load Balancer requires at least two different Availability Zones)
+# Subnets
 ###############################################
 resource "aws_subnet" "subnet_1" {
   vpc_id            = aws_vpc.main.id
@@ -136,7 +154,7 @@ resource "aws_instance" "web_server" {
   count                  = 2
   ami                    = "ami-04b4f1a9cf54c11d0"
   instance_type          = "t2.micro"
-  
+   
   subnet_id              = count.index % 2 == 0 ? aws_subnet.subnet_1.id : aws_subnet.subnet_2.id
   vpc_security_group_ids = [aws_security_group.alb_sg.id]
 

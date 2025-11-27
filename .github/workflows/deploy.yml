@@ -22,18 +22,14 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
-      # 1. INIT
       - name: Terraform Init
         run: terraform init
 
-      # 2. VALIDATE
       - name: Terraform Validate
         run: terraform validate
         
-      # 3. PLAN
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
-      # 4. APPLY 
       - name: Terraform Apply
         run: terraform apply tfplan
