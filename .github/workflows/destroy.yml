@@ -30,7 +30,7 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
         
-      # 3. PLAN (Destroy)
+      # 3. PLAN
       - name: Terraform Plan (Destroy)
         run: terraform plan -destroy
 
