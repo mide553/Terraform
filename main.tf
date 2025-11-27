@@ -1,5 +1,5 @@
 ###############################################
-# AWS Provider & Variables
+# AWS Provider
 ###############################################
 provider "aws" {
   region     = "us-east-1"
@@ -8,9 +8,24 @@ provider "aws" {
   token      = var.aws_session_token
 }
 
-variable "aws_access_key_id" { sensitive = true }
-variable "aws_secret_access_key" { sensitive = true }
-variable "aws_session_token" { sensitive = true default = "" }
+###############################################
+# Variables
+###############################################
+variable "aws_access_key_id" {
+  type      = string
+  sensitive = true
+}
+
+variable "aws_secret_access_key" {
+  type      = string
+  sensitive = true
+}
+
+variable "aws_session_token" {
+  type      = string
+  sensitive = true
+  default   = ""
+}
 
 ###############################################
 # Network: VPC, GW, Routes
