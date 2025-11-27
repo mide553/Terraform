@@ -147,6 +147,7 @@ resource "aws_instance" "web_server" {
     sudo systemctl start apache2
     sudo systemctl enable apache2
     echo "<h1>Hello World</h1>" | sudo tee /var/www/html/index.html
+    echo "<h2>Server ${count.index}<h2>"
   EOF
 
   tags = { Name = "Web-Server-${count.index}" }
