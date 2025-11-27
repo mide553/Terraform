@@ -2,4 +2,5 @@ terraform.tfvars
 .terraform
 *.lock.hcl
 *.tfstate
+*.tfstate.lock.info
 *.tfstate.backup
